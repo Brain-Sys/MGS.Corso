@@ -2,9 +2,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace MGS.Corso.WindowsApp
 {
@@ -221,11 +223,38 @@ namespace MGS.Corso.WindowsApp
             // 2000
             var sullaUI = files
                 .Where(f => f.Length > 50000)
-                .Select(f => new {
+                .Select(f => new SmallFileInfo
+                {
                     NOMEFILE = f.Name,
                     DIMENSIONE_IN_KBYTES = (f.Length / 2014).ToString() + "K"
                 })
                 .ToList();
+
+            //var sullaUI = files
+            //    .Where(f => f.Length > 50000)
+            //    .Select(f => new Button() { Content = f.Name })
+            //    .ToList();
+
+            var props = Process.GetProcesses()
+                .Where(p => p.PagedMemorySize64 > 500000)
+                .FirstOrDefault();
+
+            var dtUs = DateTime.Now.ToItaly();
+
+            var fusiOrari = TimeZoneInfo.GetSystemTimeZones()
+                .FirstOrDefault(fo => fo.DisplayName.Contains("Rom"));
+
+            Debug.WriteLine(sullaUI[0]);
+            this.lstFiles.ItemsSource = sullaUI;
+
+            string città = "Modena";
+            IEnumerable<char> caratteri = città.Take(5);
+            città = string.Join(string.Empty, caratteri);
+        }
+
+        private void todo()
+        {
+
         }
 
         //private bool filtraSoloIni(FileInfo fi)

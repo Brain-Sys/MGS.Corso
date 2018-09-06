@@ -8,8 +8,9 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Button Content="Crea Fattura" x:Name="btnCreaFattura" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="192" Height="66" Click="btnCreaFattura_Click"/>
-        <Button x:Name="btnTipiAnonimi" Content="Tipi Anonimi" HorizontalAlignment="Left" Margin="207,10,0,0" VerticalAlignment="Top" Width="167" Height="66" Click="btnTipiAnonimi_Click"/>
+        <Button Background="LightGreen" x:Name="btnTipiAnonimi" Content="Tipi Anonimi" HorizontalAlignment="Left" Margin="207,10,0,0" VerticalAlignment="Top" Width="167" Height="66" Click="btnTipiAnonimi_Click"/>
         <Button x:Name="btnLinq" Content="LINQ" HorizontalAlignment="Left" Margin="379,10,0,0" VerticalAlignment="Top" Width="185" Height="66" Click="btnLinq_Click"/>
+        <ListBox x:Name="lstFiles" HorizontalContentAlignment="Stretch" HorizontalAlignment="Left" Height="329" Margin="10,81,0,0" VerticalAlignment="Top" Width="554"/>
 
     </Grid>
 </Window>

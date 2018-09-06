@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace MGS.Corso.DomainModel
@@ -24,9 +25,20 @@ namespace MGS.Corso.DomainModel
             return anni >= 21;
         }
 
-        public static void Metodo(this IEnumerable<Fattura> lista)
+        public static DateTime ToItaly(this DateTime dateTime)
         {
+            TimeSpan timespan = TimeSpan.FromHours(1);
 
+            var italianTimezone = TimeZoneInfo.GetSystemTimeZones()
+                .Where(t => t.DisplayName.Contains("Amsterdam, Berlin"))
+                .FirstOrDefault();
+
+            if (italianTimezone != null)
+            {
+                timespan = italianTimezone.GetUtcOffset(DateTime.Now);
+            }
+
+            return dateTime.ToUniversalTime().Add(timespan);
         }
     }
 }
