@@ -94,5 +94,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MGS.Corso.DomainModel\MGS.Corso.DomainModel.csproj">
+      <Project>{eaaf68e2-46ac-47e0-9f78-70ecd7654156}</Project>
+      <Name>MGS.Corso.DomainModel</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

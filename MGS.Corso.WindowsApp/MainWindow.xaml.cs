@@ -1,18 +1,9 @@
-﻿using System;
+﻿using MGS.Corso.DomainModel;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-// using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace MGS.Corso.WindowsApp
 {
@@ -48,7 +39,6 @@ namespace MGS.Corso.WindowsApp
             Dictionary<string, Persona> dipendenti = new Dictionary<string, Persona>();
             dipendenti.Add("codfisc", new Persona());
             Persona p = dipendenti["codfisc"];
-            dipendenti.Add("codfisc", new Persona());
 
             Dictionary<int, List<Fatture>> archivio = new Dictionary<int, List<Fatture>>();
 
@@ -60,12 +50,60 @@ namespace MGS.Corso.WindowsApp
 
             var peso1 = 5.5 * Math.PI;
             var totale = somma(8, 5);
+
+
+
+
+
         }
 
         private int somma(int a, int b)
         {
             var result = a + b + qualcosa;
             return result;
+        }
+
+        private void btnCreaFattura_Click(object sender, RoutedEventArgs e)
+        {
+            // Collection Initializer(s)
+            List<int> numeri = new List<int>() { 18, 19, 20 };
+            List<int> anni = new List<int>() {
+                DateTime.Now.Year - 1,
+                DateTime.Now.Year,
+                DateTime.Now.Year + 1
+            };
+
+            // Mix
+            List<Fattura> elencoFatture = new List<Fattura>()
+            {
+                new Fattura() { Numero = this.somma(1, 1).ToString() },
+                new Fattura() { Numero = "1" },
+                new Fattura() { Numero = "1" },
+                new Fattura() { Numero = "1" },
+                new Fattura() { Numero = "1" },
+            };
+
+            // Object Initializer(s)
+            var f = new Fattura()
+            {
+                Pagata = false,
+                Numero = "1/2018",
+                Data = DateTime.Now
+            };
+
+            //f = new Fattura();
+            //f.Pagata = false;
+            //f.Data = DateTime.Now;
+            //f.Numero = "1/2018";
+
+            DateTime oggi = DateTime.Now;
+            // var dt = Utility.PrimoGiornoDelMese(oggi);
+            var dt = oggi.PrimoGiornoDelMese();
+            // oggi.PrimoGiornoDelMese();
+
+            DateTime complIgor = new DateTime(1976, 2, 28);
+            bool maggIt = complIgor.IsMaggiorenne();
+            bool maggUs = complIgor.IsMaggiorenne("US");
         }
     }
 
