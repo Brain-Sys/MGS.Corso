@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows;
 
@@ -105,6 +106,132 @@ namespace MGS.Corso.WindowsApp
             bool maggIt = complIgor.IsMaggiorenne();
             bool maggUs = complIgor.IsMaggiorenne("US");
         }
+
+        private void btnTipiAnonimi_Click(object sender, RoutedEventArgs e)
+        {
+            var t1 = new
+            {
+                MioNome = "Liborio Igor",
+                Eta = this.somma(3, 4),
+                Peso = 78.9
+            };
+
+            // short, byte, uint
+            bool? sposato;
+            DateTime? data = null;
+            double? lunghezza = null;
+            //  int? annoNascita = null;
+            Nullable<int> annoNascita = null;
+            annoNascita = 2000;
+            annoNascita++;
+
+            if (annoNascita > 1990)
+            {
+                annoNascita = null;
+            }
+
+            //if (!annoNascita.HasValue)
+            //{
+            //    int a = annoNascita.Value;
+            //}
+
+            char? carattere = null;
+            ushort? x = null;
+            int valore = annoNascita.GetValueOrDefault();
+            int? somma = annoNascita + 90;
+
+            Fattura f = new Fattura();
+            f = null;
+        }
+
+        private void btnLinq_Click(object sender, RoutedEventArgs e)
+        {
+            // 2867 file
+            DirectoryInfo di = new DirectoryInfo(@"C:\Windows\System32");
+            FileInfo[] files = di.GetFiles("*.*", SearchOption.TopDirectoryOnly);
+
+            //List<FileInfo> soloIni = new List<FileInfo>();
+            //foreach (var f in files)
+            //{
+            //    if (f.Extension == ".dll")
+            //    {
+            //        soloIni.Add(f);
+            //    }
+            //}
+
+            // && fi.Length < 20 * 1024
+            IEnumerable<FileInfo> soloFileDiTipoDll = files
+                .Where(fi => fi.Extension == ".dll")
+                .Where(fi => fi.Length < 20 * 1024)
+                .Where(fi => fi.Exists)
+                .ToList();
+
+            var ordinati = files
+                .OrderBy(fi => fi.Name[0])
+                .ThenByDescending(fi => fi.Length)
+                .ToList();
+
+            var ilPrimo1 = files.Where(f => f.LastWriteTime.Month == 8
+                && f.LastWriteTime.Year == 1800)
+                .OrderByDescending(f => f.Length)
+                .FirstOrDefault();
+
+            if (ilPrimo1 != null)
+            {
+                // Fai qualcosa...
+            }
+
+            var ilPrimo2 = files.LastOrDefault
+                (fi => fi.Name.EndsWith(".txt"));
+
+            // Single
+            // Non trovo nulla --> eccezione
+            // Trovo più elementi --> eccezione
+            // Ne trovo 1 --> OK
+
+            // SingleOrDefault
+            // Non trovo nulla --> null
+            // Trovo più elementi --> eccezione
+            // Ne trovo 1 --> OK
+
+            var cpx = files
+                .SingleOrDefault(f => f.Extension == ".zzz");
+
+            bool solaLettura = files
+                .Where(f => f.Extension == ".dll")
+                .Where(f => f.Name.StartsWith("a"))
+                .All(f => f.IsReadOnly);
+
+            if (files != null
+                && files.Any(f => f.LastAccessTime.DayOfWeek == DayOfWeek.Sunday))
+            {
+
+            }
+
+            int c = files.Count(f => f.Length >= 30000);
+
+            // FileInfo fi2 = files[200000];
+            var fi2 = files.ElementAtOrDefault(200000);
+
+            double media = files.Average(f => f.Length);
+            double somma = files.Sum(f => f.Length);
+            double piuGrande = files.Max(f => f.Length);
+            FileInfo filePiuGrande = files.OrderByDescending(f => f.Length).First();
+
+            // 2000
+            var sullaUI = files
+                .Where(f => f.Length > 50000)
+                .Select(f => new {
+                    NOMEFILE = f.Name,
+                    DIMENSIONE_IN_KBYTES = (f.Length / 2014).ToString() + "K"
+                })
+                .ToList();
+        }
+
+        //private bool filtraSoloIni(FileInfo fi)
+        //{
+        //    return fi.Extension == ".ini";
+        //}
     }
 
     internal class Fatture : object
