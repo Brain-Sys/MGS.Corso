@@ -68,6 +68,23 @@ namespace MGS.Corso.WindowsApp
 
         private void btnCreaFattura_Click(object sender, RoutedEventArgs e)
         {
+            //TIPI_CARBURANTI c1 = new TIPI_CARBURANTI();
+            //c1.Name = "Benzina";
+            //c1.Liters = 23;
+            //c1.Price = 1.768;
+
+            BENZINAEntities ctx = new BENZINAEntities();
+            //ctx.TIPI_CARBURANTI.Add(c1);
+            //ctx.SaveChanges();
+
+            // ctx.Database.SqlQuery<TIPI_CARBURANTI>("");
+
+            var listaCarburanti = ctx.TIPI_CARBURANTI.Where(c => c.Liters > 20)
+                .ToList();
+            listaCarburanti[0].Name = "Benzina V";
+            ctx.SaveChanges();
+            ctx.Dispose();
+
             // Collection Initializer(s)
             List<int> numeri = new List<int>() { 18, 19, 20 };
             List<int> anni = new List<int>() {
