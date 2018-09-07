@@ -293,6 +293,12 @@ namespace MGS.Corso.WindowsApp
             DirectoryInfo di = new DirectoryInfo(@"C:\Windows\System32");
             FileInfo[] files = di.GetFiles("*.*", SearchOption.TopDirectoryOnly);
 
+            var ini = files
+                .AsParallel()
+                .WithDegreeOfParallelism(10)
+                .Where(f => f.Extension == ".ini")
+                .ToList();
+
             // IEnumerable<IGrouping<string, FileInfo>>
             //var raggruppati1 = files.GroupBy(f => f.FirstLetter());
             //foreach (var item in raggruppati1)
