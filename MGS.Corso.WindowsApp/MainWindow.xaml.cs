@@ -318,6 +318,39 @@ namespace MGS.Corso.WindowsApp
                     Debug.WriteLine($"{file.Name}, {file.Length}");
                 }
             }
+
+
+
+
+
+
+
+            // JOIN
+            //BENZINAEntities ctx = new BENZINAEntities();
+            //var marche = ctx.Marche.ToList();
+            List<string> dbMarche = new List<string>() {
+                "BMW", "Citroen", "Fiat", "Honda", "Ferrari", "Scania", "Volvo", "Peugeot"
+            };
+
+            DirectoryInfo mainFolder = new DirectoryInfo(@"Z:\Database");
+            List<DirectoryInfo> dirMarche = mainFolder.GetDirectories().ToList();
+
+
+            var query = (from m1 in dbMarche
+                        join m2 in dirMarche on m1 equals m2.Name
+                        select new {
+                            NomeMarca = m1,
+                            QuantiPreventivi = m2.GetFiles("*.pdf").Length
+                        })
+                        .Where(o => o.QuantiPreventivi > 0)
+                        .OrderByDescending(o => o.QuantiPreventivi)
+                        .ToList();
+
+
+
+
+
+
         }
 
         //private bool filtraSoloIni(FileInfo fi)
