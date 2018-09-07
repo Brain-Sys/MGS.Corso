@@ -3,10 +3,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Xml.Linq;
 
 namespace MGS.Corso.WindowsApp
 {
@@ -165,6 +167,8 @@ namespace MGS.Corso.WindowsApp
 
         private void btnLinq_Click(object sender, RoutedEventArgs e)
         {
+            todo();
+
             // 2867 file
             DirectoryInfo di = new DirectoryInfo(@"C:\Windows\System32");
             FileInfo[] files = di.GetFiles("*.*", SearchOption.TopDirectoryOnly);
@@ -178,12 +182,20 @@ namespace MGS.Corso.WindowsApp
             //    }
             //}
 
+            // files.DammiLePrime20DLL();
+
             // && fi.Length < 20 * 1024
-            IEnumerable<FileInfo> soloFileDiTipoDll = files
+            IEnumerable<FileInfo> soloFileDiTipoDll1 = files
                 .Where(fi => fi.Extension == ".dll")
                 .Where(fi => fi.Length < 20 * 1024)
                 .Where(fi => fi.Exists)
                 .ToList();
+
+            var soloFileDiTipoDll2 = (from fi in files
+                                                        where fi.Extension == ".dll"
+                                                        && fi.Length < 20 * 1024
+                                                        && fi.Exists == true
+                                                        select fi).First();
 
             var ordinati = files
                 .OrderBy(fi => fi.Name[0])
@@ -271,7 +283,41 @@ namespace MGS.Corso.WindowsApp
 
         private void todo()
         {
+            XDocument doc = XDocument.Load("https://www.w3schools.com/xml/note.xml");
+            var nodes = doc.DescendantNodes();
+        }
 
+        private void btnGroupBy_Click(object sender, RoutedEventArgs e)
+        {
+            // 2867 file
+            DirectoryInfo di = new DirectoryInfo(@"C:\Windows\System32");
+            FileInfo[] files = di.GetFiles("*.*", SearchOption.TopDirectoryOnly);
+
+            // IEnumerable<IGrouping<string, FileInfo>>
+            //var raggruppati1 = files.GroupBy(f => f.FirstLetter());
+            //foreach (var item in raggruppati1)
+            //{
+            //    Debug.WriteLine($"Raggruppati per {item.Key}");
+
+            //    foreach (var file in item)
+            //    {
+            //        Debug.WriteLine("\t" + file.Name);
+            //    }
+            //}
+
+            var raggruppati2 = files
+                .GroupBy(f => f.CreationTime.Month)
+                .OrderBy(f => f.Key);
+            foreach (var item in raggruppati2)
+            {
+                string month = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(item.Key);
+                Debug.WriteLine($"Raggruppati per {month}");
+
+                foreach (var file in item.OrderByDescending(f => f.Length))
+                {
+                    Debug.WriteLine($"{file.Name}, {file.Length}");
+                }
+            }
         }
 
         //private bool filtraSoloIni(FileInfo fi)
