@@ -167,6 +167,8 @@ namespace MGS.Corso.WindowsApp
 
         private void btnLinq_Click(object sender, RoutedEventArgs e)
         {
+            this.btnLinq.Content = "LINQ2222222222222222222";
+            this.btnLinq.IsEnabled = false;
             todo();
 
             // 2867 file

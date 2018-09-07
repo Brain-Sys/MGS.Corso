@@ -72,6 +72,9 @@
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StartWindow.xaml.cs">
+      <DependentUpon>StartWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TIPI_CARBURANTI.cs">
       <DependentUpon>FuelDB.tt</DependentUpon>
     </Compile>
@@ -101,6 +104,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="StartWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -140,6 +147,10 @@
     <ProjectReference Include="..\MGS.Corso.DomainModel\MGS.Corso.DomainModel.csproj">
       <Project>{eaaf68e2-46ac-47e0-9f78-70ecd7654156}</Project>
       <Name>MGS.Corso.DomainModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MGS.Corso.ViewModels\MGS.Corso.ViewModels.csproj">
+      <Project>{d413a1c2-f8af-4650-ba1d-2193a56eab05}</Project>
+      <Name>MGS.Corso.ViewModels</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

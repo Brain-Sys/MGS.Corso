@@ -15,12 +15,37 @@
         </Grid.RowDefinitions>
         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden">
             <StackPanel Orientation="Horizontal">
+
+
+
                 <Button Content="1° bottone" FontSize="20"
                 Grid.Row="0" Width="150" Margin="4"
-                x:Name="btnDemoTask" Click="btnDemoTask_Click" />
+                x:Name="btnDemoTask" Click="btnDemoTask_Click">
+                    <Button.Background>
+                        <SolidColorBrush Color="Yellow" />
+                    </Button.Background>
+                </Button>
+
+
+
+
                 <Button Content="2° bottone" FontSize="20" Width="150" Margin="0,4,4,4" />
-                <Button Content="3° bottone" FontSize="20" Width="150" Margin="0,4,4,4" />
-                <Button Content="4° bottone" FontSize="20" Width="150" Margin="0,4,4,4" />
+                <Button FontSize="20" Width="150" Margin="0,4,4,4">
+                    <Button.Content>
+                        <StackPanel Width="100">
+                            <TextBlock Text="Salva" HorizontalAlignment="Center" />
+                            <Slider Minimum="1" Maximum="3" />
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+                <Button Content="Esporta" FontSize="20" Width="150" Margin="0,4,4,4">
+                    <Button.ToolTip>
+                        <Grid>
+                            <TextBlock Text="Esporta le fatture" FontStyle="Italic" FontSize="16"
+                                   Foreground="Blue" Background="Red" Padding="32" />
+                        </Grid>
+                    </Button.ToolTip>
+                </Button>
                 <Button Content="5° bottone" FontSize="20" Width="150" Margin="0,4,4,4" />
                 <Button Content="6° bottone" FontSize="20" Width="150" Margin="0,4,4,4" />
                 <Button Content="7° bottone" FontSize="20" Width="150" Margin="0,4,4,4" />
