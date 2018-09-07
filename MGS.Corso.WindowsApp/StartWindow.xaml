@@ -38,7 +38,15 @@
                 <Style TargetType="ProgressBar">
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding IsCritical}" Value="True">
-                                <Setter Property="Foreground" Value="Red" />
+                            <Setter Property="Foreground">
+                                <Setter.Value>
+                                    <LinearGradientBrush>
+                                        <GradientStop Color="DarkOrange" Offset="0.0" />
+                                        <GradientStop Color="Red" Offset="0.4" />
+                                        <GradientStop Color="DarkViolet" Offset="0.7" />
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
                             </DataTrigger>
                         <DataTrigger Binding="{Binding IsCritical}" Value="False">
                             <Setter Property="Foreground" Value="Green" />
