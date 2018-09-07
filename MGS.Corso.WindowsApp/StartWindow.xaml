@@ -14,6 +14,13 @@
     </Window.Resources>
     
     <Grid DataContext="{StaticResource viewmodel}">
+
+        <Border CornerRadius="10,40,10,40" Background="Red" VerticalAlignment="Top" Width="200" Height="50"
+                BorderBrush="DarkOrange" BorderThickness="6">
+            <TextBlock Text="{Binding Message}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                       FontWeight="ExtraBlack" FontSize="14" />
+        </Border>
+        
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="200">
             <TextBox Text="{Binding Username}" FontSize="20" />
             <TextBox Text="{Binding Password}" FontSize="20" Margin="0,16,0,0" />
@@ -24,9 +31,23 @@
                     Click="Button_Click" />
         </StackPanel>
 
-        <ProgressBar IsIndeterminate="{Binding IsBusy}"
-                     ToolTip="{Binding Username}"
-                     VerticalAlignment="Bottom" Margin="8" Height="20" />
-
+        <ProgressBar Value="{Binding Counter}"
+                     ToolTip="{Binding Username}" Minimum="0" Maximum="1000"
+                     VerticalAlignment="Bottom" Margin="8" Height="20">
+            <ProgressBar.Style>
+                <Style TargetType="ProgressBar">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsCritical}" Value="True">
+                                <Setter Property="Foreground" Value="Red" />
+                            </DataTrigger>
+                        <DataTrigger Binding="{Binding IsCritical}" Value="False">
+                            <Setter Property="Foreground" Value="Green" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ProgressBar.Style>
+        </ProgressBar>
+        <TextBlock Text="{Binding Timestamp,StringFormat=HH:mm:ss:fff}" VerticalAlignment="Bottom"
+                   HorizontalAlignment="Right" Margin="0,0,16,32" FontSize="24" />
     </Grid>
 </Window>
